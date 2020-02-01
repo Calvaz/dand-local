@@ -12,8 +12,9 @@ export default function Characters() {
             <CharacterLink title="Aramil" />
             <CharacterLink title="Erevan" />
             <CharacterLink title="Rick" />
-            <CharacterLink title="Lili" />
-            
+            <CharacterLink title="Lili" />            
         </Layout>
+
+        
     )
 }
