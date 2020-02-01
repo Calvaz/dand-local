@@ -1,6 +1,6 @@
 import Header from './header';
 
-export default function Layout (props){
+export default function Layout (props: any){
     
     const layoutStyle = {
         margin: 20,
