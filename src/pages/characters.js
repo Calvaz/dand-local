@@ -1,14 +1,15 @@
 import React from 'react'
 
 export default class Character extends React.Component {
+  
     render() {
+        const chars = this.props.characters.map((c) => 
+        <li>{c.name}</li>)
+
         return (
             <div> Characters:
                 <ul>
-                    {this.props.characters.forEach(element => {
-                        return (<li>{element.name}</li>)
-                    })
-                    }
+                   {chars}
                 </ul>
             </div>
         )
