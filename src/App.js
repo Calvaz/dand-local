@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
 import Layout from './component/layout';
+import Character from './pages/characters';
 
 export default function App() {
 
-  const el = (<p>it is: {new Date().toLocaleTimeString()}</p>);
+  let chars = [{name: 'Ivan'}, {name: 'Mario'}]
 
   return (  
       <Layout>
-        {el}
+        <Character characters={chars} ></Character>
       </Layout>
   );
 }
