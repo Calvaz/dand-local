@@ -1,6 +1,7 @@
 import Header from './header';
+import React from 'react';
 
-export default function Layout (props: any){
+export default function Layout (props){
     
     const layoutStyle = {
         margin: 20,
@@ -15,4 +16,3 @@ export default function Layout (props: any){
         </div >
     )
 };
-
