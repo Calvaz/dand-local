@@ -12,23 +12,17 @@ export default class App extends React.Component {
     const CHARACTERS = 'CHARACTERS'
     const LOCATIONS = 'LOCATIONS'
 
-    this.setState({layout: DASHBOARD})
+    this.state = {layout: DASHBOARD}
+  }
+
+  setPage(page){
+    
   }
 
   render () {
-    let layout = 
-    switch ({this.state.layout}) {
-      case {DASHBOARD}:
-        <p>evabbe</p>
-        break;
-    
-      default:
-        break;
-    }
 
     return (
       <Layout>
-        
         <Character characters={this.chars} />
       </Layout>
     )
