@@ -11,22 +11,20 @@ export const LOCATIONS = 'LOCATIONS'
 export default class Layout extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {layout: DASHBOARD}
+    this.state = { layout: DASHBOARD }
   }
-  
-  onPageChange(page){
-    this.setState({layout: page})
 
-    
+  onPageChange (page) {
+    this.setState({ layout: page })
   }
 
   render () {
     return (
       <div>
-        <Header onChange={this.onPageChange.bind(this)} value={this.state.layout}/>
-        {this.state.layout === CHARACTERS && <Characters></Characters>}
-        {this.state.layout === LOCATIONS && <Locations></Locations>}
-        {this.state.layout === DASHBOARD && <Dashboard></Dashboard>}
+        <Header onChange={this.onPageChange.bind(this)} value={this.state.layout} />
+        {this.state.layout === CHARACTERS && <Characters />}
+        {this.state.layout === LOCATIONS && <Locations />}
+        {this.state.layout === DASHBOARD && <Dashboard />}
       </div>
     )
   }
