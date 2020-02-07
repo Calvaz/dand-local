@@ -1,18 +1,20 @@
-import Header from './header';
-import React from 'react';
+import Header from './header'
+import React from 'react'
 
-export default function Layout (props){
-    
+export default class Layout extends React.Component {
+  render () {
     const layoutStyle = {
-        margin: 20,
-        padding: 20,
-        border: '1px solid #DDD'
-    };
+      margin: 20,
+      padding: 20,
+      border: '1px solid #DDD'
+    }
 
     return (
-        <div style={layoutStyle} >
-            <Header />
-            {props.children}
-        </div >
+
+      <div style={layoutStyle}>
+        <Header />
+        {this.props.children}
+      </div>
     )
-};
+  }
+}
