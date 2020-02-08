@@ -1,4 +1,5 @@
 import React from 'react'
+import Store from '../../store'
 
 export default class CharacterForm extends React.Component {
   constructor (props) {
@@ -17,6 +18,9 @@ export default class CharacterForm extends React.Component {
   addNewCharacter (event) {
     console.log(this.state)
     //todo store save
+    let store = new Store()
+    store.addCharacter(this.state);
+    
     event.preventDefault()
   }
 
