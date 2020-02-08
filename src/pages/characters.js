@@ -1,38 +1,54 @@
 import React from 'react'
-import CharacterList from '../component/character-list'
+import CharacterList from '../component/character/character-list'
 export default class Character extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.newCharacter.bind(this)
-    this.handleNewChar.bind(this)
-    this.handleNameChange.bind(this)
+    this.handleFormVisibile = this.handleFormVisibile.bind(this)
+    this.addNewCharacter = this.addNewCharacter.bind(this)
+    this.handleChange = this.handleChange.bind(this)
 
     this.state = {
-      addCharForm: false
+      isCharacterFormVisible: false,
+      newCharacter: {
+        name: '',
+        class: ''
+      }
     }
   }
 
-  newCharacter () {
-    this.setState({ addCharForm: !this.state.addCharForm })
+  handleFormVisibile() {
+    this.setState({ isCharacterFormVisible: !this.state.isCharacterFormVisible })
   }
 
-  handleNewChar () {
-    this.newCharacter()
+  addNewCharacter(event) {
+    console.log('new character added' + this.state.newCharacter)
+    event.preventDefault()
   }
 
-  handleNameChange (e) {
-    e.target.value = e.target.value.toUpperCase()
+  handleChange(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      newCharacter: {...this.state.newCharacter, [name]: value}
+    })
+    console.log(this.state)
   }
 
-  render () {
+  render() {
     return (
       <article>
         <h2>Characters</h2>
-        <button onClick={this.newCharacter.bind(this)}>Add</button>
+        <button onClick={this.handleFormVisibile} disabled={this.state.isCharacterFormVisible}>New</button>
 
-        {this.state.addCharForm &&
-          <form>
-            <input name="name" value={null} onChange={this.handleNameChange}/>
+        {this.state.isCharacterFormVisible &&
+          <form onSubmit={this.addNewCharacter}>
+            <fieldset>
+              Name: <input name="name" value={this.state.newCharacter.name} onChange={this.handleChange} />
+              Class: <input name="class" value={this.state.newCharacter.class} onChange={this.handleChange} />
+              <input type="submit" value="Add Character"></input>
+            </fieldset>
           </form>
         }
 
