@@ -15,11 +15,10 @@ export default class CharacterForm extends React.Component {
     }
   }
 
-  
   addNewCharacter (event) {
     event.preventDefault()
-    
-    let newChar = {
+
+    const newChar = {
       _id: uuid.v4(),
       name: this.state.name,
       class: this.state.class
@@ -48,7 +47,7 @@ export default class CharacterForm extends React.Component {
           Class: <input name='class' value={this.state.class} onChange={this.handleChange} />
           <input type='submit' value='Add Character' />
         </fieldset>
-        
+
       </form>
     )
   }
