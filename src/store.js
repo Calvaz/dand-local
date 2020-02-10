@@ -9,10 +9,8 @@ export default class Store {
         }
         
         this.getAllCharacter = function () {
-            this.store.allDocs({ include_docs: true, descending: true })
-                .then(function (doc, err) {
-                    if (err)
-                        console.log(err)
+            return this.store.allDocs({ include_docs: true, descending: true })
+                .then(function (doc) {
                     return doc.rows
                 })
         }
