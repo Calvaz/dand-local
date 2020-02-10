@@ -9,11 +9,9 @@ export default class Character extends React.Component {
     this.handleFormVisibile = this.handleFormVisibile.bind(this)
     this.handleSubmitCharacter = this.handleSubmitCharacter.bind(this)
 
-    let characters = this.store.getAllCharacter()
-
     this.state = {
       isCharacterFormVisible: false,
-      characters: characters
+      characters: []
     }
   }
 
@@ -28,6 +26,10 @@ export default class Character extends React.Component {
     console.log('submitted')
   }
 
+  componentDidMount(){
+    let characters = this.store.getAllCharacter()
+    this.setState({characters: characters})
+  }
 
   render () {
     return (
