@@ -2,6 +2,7 @@ import React from 'react'
 import CharacterList from '../component/character/character-list'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
+import CharacterDetail from '../component/character/character.detail'
 export default class Character extends React.Component {
   constructor (props) {
     super(props)
@@ -11,6 +12,8 @@ export default class Character extends React.Component {
 
     this.state = {
       isCharacterFormVisible: false,
+      isCharacterSelected: false,
+      selectedCharacter: {},
       characters: []
     }
   }
@@ -28,8 +31,17 @@ export default class Character extends React.Component {
 
   handleSubmitCharacter () {
     this.fetchCharacters()
+    this.handleFormVisibile()
   }
   
+  onSelectCharacter = (character) => {
+    this.setState({
+      selectedCharacter: character,
+      isCharacterSelected: true
+    })
+    
+  }
+
   componentDidMount(){
     this.fetchCharacters()
   }
@@ -43,7 +55,10 @@ export default class Character extends React.Component {
         {this.state.isCharacterFormVisible &&
           <CharacterForm submitComplete={this.handleSubmitCharacter}/>}
 
-        <CharacterList characters={this.state.characters}/>
+        <CharacterList characters={this.state.characters} selectCharacter={this.onSelectCharacter}/>
+
+        {this.state.isCharacterSelected && 
+        <CharacterDetail character={this.state.selectedCharacter}></CharacterDetail>}
       </article>
     )
   }

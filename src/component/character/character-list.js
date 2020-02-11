@@ -1,12 +1,10 @@
 import React from 'react'
-import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
-
 
 export default class CharacterList extends React.Component {
   
   render () {
     const charlist = this.props.characters.map(c => (
-       <li key={c._id}> 
+       <li key={c._id} onClick={(e) => this.props.selectCharacter(c,e)}> 
        {c.name} - {c.class}
        </li>
     ))
