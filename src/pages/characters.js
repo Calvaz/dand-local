@@ -19,15 +19,19 @@ export default class Character extends React.Component {
     this.setState({ isCharacterFormVisible: !this.state.isCharacterFormVisible })
   }
 
-  handleSubmitCharacter () {
-    
-  }
-  
-  componentDidMount(){
+  fetchCharacters = () =>{ 
     this.store.getAllCharacter().then(
       (characters) =>
       this.setState({characters: characters})
     )
+  }
+
+  handleSubmitCharacter () {
+    this.fetchCharacters()
+  }
+  
+  componentDidMount(){
+    this.fetchCharacters()
   }
 
   render () {
