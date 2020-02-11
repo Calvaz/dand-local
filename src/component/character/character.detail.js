@@ -12,6 +12,7 @@ export default class CharacterDetail extends React.Component {
       <div style={style}>
         <h3>{this.props.character.name}</h3>
         <h4>{this.props.character.class}</h4>        
-      </div>)
+      </div>
+      )
   }
 }
