@@ -4,7 +4,9 @@
     width: 80vw;
     font-size: large;
 }
-
+li{
+    list-style: none;
+}
 menu{
     display: inline-flex;
 }

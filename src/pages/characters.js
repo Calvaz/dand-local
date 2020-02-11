@@ -20,12 +20,9 @@ export default class Character extends React.Component {
   }
 
   handleSubmitCharacter () {
-    this.store.getAllCharacter().then(
-      (characters) =>
-      this.setState({characters: characters})
-    )
+    
   }
-
+  
   componentDidMount(){
     this.store.getAllCharacter().then(
       (characters) =>
@@ -42,7 +39,7 @@ export default class Character extends React.Component {
         {this.state.isCharacterFormVisible &&
           <CharacterForm submitComplete={this.handleSubmitCharacter}/>}
 
-        <CharacterList characters={this.state.characters ?? []}/>
+        <CharacterList characters={this.state.characters}/>
       </article>
     )
   }

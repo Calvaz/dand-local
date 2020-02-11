@@ -11,7 +11,7 @@ export default class Store {
     this.getAllCharacter = function () {
       return this.store.allDocs({ include_docs: true, descending: true })
         .then(function (doc) {
-          return doc.rows
+          return doc.rows.map((doc => doc.doc))
         })
     }
   }
