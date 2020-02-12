@@ -51,7 +51,10 @@ export default class Character extends React.Component {
     console.debug(deleteResult ? 'Character Deleted' : 'Error Occured in deletion')
     if(deleteResult){
       this.fetchCharacters()
-      this.setState({selectCharacter: ''})
+      this.setState({
+        selectedCharacter: {},
+        isCharacterSelected: false
+    })
     }
   }
 
