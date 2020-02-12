@@ -14,5 +14,10 @@ export default class Store {
           return doc.rows.map((doc => doc.doc))
         })
     }
+
+    this.delete = function(item) {
+      return this.store.remove(item)
+        .then(function(val) {return val.ok})
+    }
   }
 }
