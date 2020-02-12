@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.flex-item {
+    flex: 1;   
+    border: #eceded solid 2px;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 1em
+}
+
+.character-detail {
+    border:#eceded solid 2px;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.character-detail span{
+    font-size: large;
+    font-weight: bold;
+}
