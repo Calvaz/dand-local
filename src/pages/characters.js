@@ -48,9 +48,11 @@ export default class Character extends React.Component {
 
   render () {
     return (
+      <main>
       <article>
         <h2>Characters</h2>
         <button onClick={this.handleFormVisibile} disabled={this.state.isCharacterFormVisible}>New</button>
+        </article>
 
         {this.state.isCharacterFormVisible &&
           <CharacterForm submitComplete={this.handleSubmitCharacter}/>}
@@ -59,7 +61,7 @@ export default class Character extends React.Component {
 
         {this.state.isCharacterSelected && 
         <CharacterDetail character={this.state.selectedCharacter}></CharacterDetail>}
-      </article>
+      </main>
     )
   }
 }

@@ -41,14 +41,15 @@ export default class CharacterForm extends React.Component {
 
   render () {
     return (
+      <article>
       <form onSubmit={this.addNewCharacter}>
         <fieldset>
           Name: <input name='name' value={this.state.name} onChange={this.handleChange} />
           Class: <input name='class' value={this.state.class} onChange={this.handleChange} />
           <input type='submit' value='Add Character' />
         </fieldset>
-
       </form>
+      </article>
     )
   }
 }

@@ -6,14 +6,13 @@ a {
     color: #d69733
 }
 
-
 #dand-layout{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;    
     font-size: large;
     padding: 1em 3em;
 }
 
-#flex-container{
+#root-flex{
     display: flex;
 }
 
@@ -66,3 +65,4 @@ header h1, header h2{
     display: inline;
     padding: 1em 1em 0 0
 }
+

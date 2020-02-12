@@ -1,18 +1,14 @@
 import React from 'react'
-
+import './character.css'
 export default class CharacterDetail extends React.Component {
   
   render () {
 
-    const style = {
-      border: '2px solid white'
-    }
-
     return (
-      <div style={style}>
-        <h3>{this.props.character.name}</h3>
-        <h4>{this.props.character.class}</h4>        
-      </div>
+      <article className='character-detail'>
+      <div><label>Name: </label>  <span>{this.props.character.name}</span></div>
+      <div><label>Class: </label> <span>{this.props.character.class}</span></div>
+      </article>
       )
   }
 }
