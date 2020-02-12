@@ -1,8 +1,6 @@
 import React from 'react'
 import Clock from './clock'
 
-import { DASHBOARD, CHARACTERS, LOCATIONS } from './layout'
-
 export default class Header extends React.Component {
   changePage (page) {
     this.props.onChange(page)
