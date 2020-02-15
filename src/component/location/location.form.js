@@ -1,17 +1,20 @@
 import React from 'react'
-import Store from '../../store'
 import uuid from 'uuid'
+import Store from '../../store';
 
 export default class LocationForm extends React.Component  {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this)
+    this.addNewLocation = this.addNewLocation.bind(this)
 
     this.store = new Store()
     this.state = {
-      title = '',
-      description = '',
-      favorite = false
+      title : '',
+      description : '',
+      favorite : false
     }
+    
   }
   
   addNewLocation(event) {
@@ -19,23 +22,42 @@ export default class LocationForm extends React.Component  {
 
       const newLocation = {
         _id: uuid.v4(),
-        title = this.state.title,
-        description = this.state.description,
-        favorite = this.state.favorite
+        title: this.state.title,
+        description: this.state.description,
+        favorite: this.state.favorite
       }
 
       console.log(newLocation);
       this.store.addCharacter(newLocation)
       console.log(this.store.getAllCharacter())
       this.store.getAllCharacter()
-      
     }
+
+    handleChange(event) {
+        const target = event.target
+        const value = target.value 
+        const name = target.name
+
+        this.setState({
+            [name]: value
+    })
+    }
+
 
   render() {
       return (
-        <button >
-            {() => this.addNewLocation()}
-        </button>
+        <article>
+            <form onSubmit={this.addNewLocation}>
+                <fieldset>
+                    <label>Location: </label>
+                    <input name="title" value={this.state.title} onChange={this.handleChange} />
+                    <br />
+                    <label>Description: </label>
+                    <textarea name="description" value={this.state.description} onChange={this.handleChange} className="locDescription" /> 
+                </fieldset> 
+                <input type="submit" value="Add location" />
+            </form>
+        </article>  
       )
   }
 }
