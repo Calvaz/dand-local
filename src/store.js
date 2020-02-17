@@ -19,5 +19,10 @@ export default class Store {
       return this.store.remove(item)
         .then(function(val) {return val.ok})
     }
+
+    this.update = function(item){
+      return this.store.put(item)
+        .then(function(val) {return val.ok})
+    }
   }
 }
