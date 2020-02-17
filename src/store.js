@@ -11,13 +11,13 @@ export default class Store {
     this.getAllCharacter = function () {
       return this.store.allDocs({ include_docs: true, descending: true })
         .then(function (doc) {
-          return doc.rows.map((doc => doc.doc))
+          return doc.rows.map(doc => doc.doc)
         })
     }
 
-    this.delete = function(item) {
+    this.delete = function (item) {
       return this.store.remove(item)
-        .then(function(val) {return val.ok})
+        .then(function (val) { return val.ok })
     }
   }
 }
