@@ -58,6 +58,11 @@ export default class Character extends React.Component {
     }
   }
 
+  addImage = (e,character) => {
+    
+    this.store.update(character)
+  }
+
   componentDidMount() {
     this.fetchCharacters()
   }
@@ -81,7 +86,8 @@ export default class Character extends React.Component {
         {this.state.isCharacterSelected &&
           <CharacterDetail
             character={this.state.selectedCharacter}
-            onDelete={this.deleteCharacter} />}
+            onDelete={this.deleteCharacter} 
+            addImage={this.addImage}/>}
       </main>
     )
   }

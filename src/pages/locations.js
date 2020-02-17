@@ -9,38 +9,43 @@ export default class Locations extends React.Component {
 
     this.store = new Store()
     this.handleFormVisibile = this.handleFormVisibile.bind(this)
-    
+
     this.state = {
-      isLocationFormVisible : false,
-      locations : []
+      isLocationFormVisible: false,
+      locations: []
     }
   }
 
   handleFormVisibile() {
-    this.setState({ isLocationFormVisible : !this.isLocationFormVisible })
+    this.setState({ isLocationFormVisible: !this.isLocationFormVisible })
   }
 
   fetchLocations = () => {
-    this.store.getAllCharacter().then(
-      (locations) => 
+    this.store.getAllLocation().then(
+      (locations) =>
         this.setState({ locations: locations })
     )
   }
 
-  render () {
+  componentDidMount() {
+    this.fetchLocations()
+  }
+
+  render() {
     return (
       <main>
-        <article> 
+        <article>
           <h2>Locations</h2>
           <button onClick={this.handleFormVisibile} disabled={this.state.isLocationFormVisible}>New</button>
-        </article> 
-        {this.state.isLocationFormVisible && 
-        <LocationForm
-          submitComplete = {this.fetchLocations()} />}
+        </article>
+        {this.state.isLocationFormVisible &&
+          <LocationForm
+            submitComplete={this.fetchLocations()} />
+        }
 
         <LocationList
-          locations = {this.state.locations}
-          />
+          locations={this.state.locations}
+        />
       </main>
     )
   }
