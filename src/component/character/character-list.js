@@ -1,9 +1,8 @@
 import React from 'react'
-import FaceIcon from '@material-ui/icons/Face';
+import FaceIcon from '@material-ui/icons/Face'
 import './character.css'
 
 export default class CharacterList extends React.Component {
-
   render () {
     const charlist = this.props.characters.map(c => (
        <div className='flex-item'
@@ -13,10 +12,10 @@ export default class CharacterList extends React.Component {
        </div>
     ))
 
-    return (      
-        <article className='flex-container'>
-          {charlist}
-        </article>
+    return (
+      <article className='flex-container'>
+        {charlist}
+      </article>
     )
   }
 }

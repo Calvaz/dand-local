@@ -1,9 +1,7 @@
 import React from 'react'
 import './character.css'
 export default class CharacterDetail extends React.Component {
-  
   render () {
-
     return (
       <article className='character-detail'>
         <button onClick={(e) => this.props.onDelete(this.props.character)}>X</button>
@@ -15,6 +13,6 @@ export default class CharacterDetail extends React.Component {
         onChange={(e) => this.props.addImage(e,this.props.character)}
         type="file" ></input>
       </article>
-      )
+    )
   }
 }

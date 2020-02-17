@@ -9,31 +9,31 @@ export const CHARACTERS = 'CHARACTERS'
 export const LOCATIONS = 'LOCATIONS'
 
 export default class Layout extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = { layout: DASHBOARD }
   }
 
-  onPageChange(page) {
+  onPageChange (page) {
     this.setState({ layout: page })
   }
 
-  render() {
+  render () {
     return (
-      <div id="dand-layout">
+      <div id='dand-layout'>
         <Header />
-        <div id="root-flex"><nav>
+        <div id='root-flex'><nav>
           <ol>
             <li><button onClick={this.onPageChange.bind(this, DASHBOARD)}>Dashboard</button></li>
             <li><button onClick={this.onPageChange.bind(this, CHARACTERS)}>Characters</button></li>
             <li><button onClick={this.onPageChange.bind(this, LOCATIONS)}>Locations</button></li>
           </ol>
-        </nav>          
-            {this.state.layout === CHARACTERS && <Characters />}
-            {this.state.layout === LOCATIONS && <Locations />}
-            {this.state.layout === DASHBOARD && <Dashboard />}
-          
+        </nav>
+          {this.state.layout === CHARACTERS && <Characters />}
+          {this.state.layout === LOCATIONS && <Locations />}
+          {this.state.layout === DASHBOARD && <Dashboard />}
+
         </div>
       </div>
     )
