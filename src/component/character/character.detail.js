@@ -27,6 +27,7 @@ export default class CharacterDetail extends React.Component {
       this.getImageURL()
     }
   }
+
   render() {
 
     return (

@@ -3,13 +3,15 @@ import FaceIcon from '@material-ui/icons/Face'
 import './character.css'
 
 export default class CharacterList extends React.Component {
-  render () {
+  render() {
+
     const charlist = this.props.characters.map(c => (
-       <div className='flex-item'
-        key={c._id} onClick={(e) => this.props.selectCharacter(c,e)}> 
-        <FaceIcon styles={'color: white'}/> <small>{c.class}</small>
+      <div className={'flex-item' + (c == this.props.selectedCharacter ? ' selected-item' : '')}
+        key={c._id} onClick={(e) => this.props.selectCharacter(c, e)}>
+
+        <FaceIcon styles={'color: white'} /> <small>{c.class}</small>
         <p>{c.name}</p>
-       </div>
+      </div>
     ))
 
     return (

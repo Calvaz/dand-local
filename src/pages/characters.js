@@ -46,21 +46,21 @@ export default class Character extends React.Component {
     let deleteResult = this.store.delete(character)
       .then((res) => {
         return res
-      })    
-      
+      })
+
     console.debug(deleteResult ? 'Character Deleted' : 'Error Occured in deletion')
-    if(deleteResult){
+    if (deleteResult) {
       this.fetchCharacters()
       this.setState({
         selectedCharacter: {},
         isCharacterSelected: false
-    })
+      })
     }
   }
 
-  addImage = (e,character) => {
+  addImage = (e, character) => {
     let image = e.target.files[0]
-    this.store.addImage(character,image)
+    this.store.addImage(character, image)
   }
 
   componentDidMount() {
@@ -81,13 +81,14 @@ export default class Character extends React.Component {
 
         <CharacterList
           characters={this.state.characters}
-          selectCharacter={this.onSelectCharacter} />
+          selectCharacter={this.onSelectCharacter}
+          selectedCharacter={this.state.selectedCharacter} />
 
         {this.state.isCharacterSelected &&
           <CharacterDetail
             character={this.state.selectedCharacter}
-            onDelete={this.deleteCharacter} 
-            addImage={this.addImage}/>}
+            onDelete={this.deleteCharacter}
+            addImage={this.addImage} />}
       </main>
     )
   }
