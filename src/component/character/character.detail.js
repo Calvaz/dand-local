@@ -19,7 +19,10 @@ export default class CharacterDetail extends React.Component {
         let url = URL.createObjectURL(image)
         this.setState({ imageUrl: url })
       })
-      .catch((e) => { console.error(e) })
+      .catch((e) => {
+        this.setState({ imageUrl: undefined })
+        console.error(e)
+      })
   }
 
   componentDidUpdate(prevProps) {
