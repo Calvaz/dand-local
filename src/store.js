@@ -16,10 +16,10 @@ export default class Store {
       location.type = LOCATION_TYPE
       this.store.put(location)
     }
-    
-    this.addImage = function(item, attachment){
-      this.store.putAttachment(item._id,'image',attachment,item._rev, attachment.type)
-      .then((res)=>console.log(res))
+
+    this.addImage = function (item, attachment) {
+      this.store.putAttachment(item._id, item._id, item._rev, attachment, attachment.type)
+        .then((res) => console.log(res))
     }
 
     this.getAllCharacter = function () {
@@ -45,9 +45,9 @@ export default class Store {
         })
     }
 
-    this.update = function(item){
+    this.update = function (item) {
       return this.store.put(item)
-        .then(function(val) {return val.ok})
+        .then(function (val) { return val.ok })
     }
   }
 }

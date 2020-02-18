@@ -9,17 +9,17 @@ export const CHARACTERS = 'CHARACTERS'
 export const LOCATIONS = 'LOCATIONS'
 
 export default class Layout extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = { layout: DASHBOARD }
   }
 
-  onPageChange (page) {
+  onPageChange(page) {
     this.setState({ layout: page })
   }
 
-  render () {
+  render() {
     return (
       <div id='dand-layout'>
         <Header />
