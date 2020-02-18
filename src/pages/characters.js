@@ -59,8 +59,8 @@ export default class Character extends React.Component {
   }
 
   addImage = (e,character) => {
-    
-    this.store.update(character)
+    let image = e.target.files[0]
+    this.store.addImage(character,image)
   }
 
   componentDidMount() {

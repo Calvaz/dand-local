@@ -16,6 +16,11 @@ export default class Store {
       location.type = LOCATION_TYPE
       this.store.put(location)
     }
+    
+    this.addImage = function(item, attachment){
+      this.store.putAttachment(item._id,'image',attachment,item._rev, attachment.type)
+      .then((res)=>console.log(res))
+    }
 
     this.getAllCharacter = function () {
       return this.getAllByType(CHARACTER_TYPE)
