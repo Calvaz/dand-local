@@ -17,6 +17,11 @@ export default class Store {
       this.store.put(location)
     }
 
+    this.add = function(obj, name) {
+      obj.type = name
+      this.store.put(obj)
+    }
+
     this.addImage = function (item, attachment) {
       this.store.putAttachment(item._id, item._id, item._rev, attachment, attachment.type)
         .then((res) => console.log(res))
@@ -28,6 +33,10 @@ export default class Store {
 
     this.getAllLocation = function () {
       return this.getAllByType(LOCATION_TYPE)
+    }
+
+    this.getAllByTypeName = function(typeName) {
+      return this.getAllByType(typeName)
     }
 
     this.getAllByType = function (type) {

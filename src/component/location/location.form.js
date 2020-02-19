@@ -26,7 +26,7 @@ export default class LocationForm extends React.Component {
       favorite: this.state.favorite
     }
 
-    this.store.addLocation(newLocation)
+    this.store.add(newLocation, 'LOCATION_TYPE')
     console.log(newLocation)
   }
 

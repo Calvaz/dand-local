@@ -21,7 +21,7 @@ export default class Locations extends React.Component {
   }
 
   fetchLocations = () => {
-    this.store.getAllLocation().then(
+    this.store.getAllByTypeName('LOCATION_TYPE').then(
       (locations) =>
         this.setState({ locations: locations })
     )
