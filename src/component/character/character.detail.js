@@ -20,7 +20,7 @@ export default class CharacterDetail extends React.Component {
         this.setState({ imageUrl: url })
       })
       .catch((e) => {
-        this.setState({ imageUrl: undefined })
+        this.setState({ imageUrl: null })
         console.error(e)
       })
   }
@@ -39,10 +39,17 @@ export default class CharacterDetail extends React.Component {
 
         <div><label>Name: </label>  <span>{this.props.character.name}</span></div>
         <div><label>Class: </label> <span>{this.props.character.class}</span></div>
-        <div><img src={this.state.imageUrl} ></img></div>
-        <input id="image" name="image"
+        <div>
+       
+          {(this.state.imageUrl != null) ?
+            <img class="detail-image" src={this.state.imageUrl} ></img>
+            : <p>+</p>
+          }
+          <input id="image" name="image"
           onChange={(e) => this.props.addImage(e, this.props.character)}
           type="file" ></input>
+
+        </div>
       </article>
     )
   }

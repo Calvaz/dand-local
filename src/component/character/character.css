@@ -33,3 +33,7 @@
     -moz-box-sizing: border-box;
     border-top: #eceded solid 15px;
 }
+
+.detail-image{
+    width:10em;
+}
