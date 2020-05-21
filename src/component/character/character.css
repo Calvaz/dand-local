@@ -1,0 +1,35 @@
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-item {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    flex: 1;   
+    border: #eceded solid 2px;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 1em 
+
+}
+
+.character-detail {
+    border:#eceded solid 2px;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.character-detail span{
+    font-size: large;
+    font-weight: bold;
+}
+
+.selected-item{
+    box-sizing: border-box;
+
+    -moz-box-sizing: border-box;
+    border-top: #eceded solid 15px;
+}
