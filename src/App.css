@@ -20,6 +20,9 @@ main {
     padding: 2em;
 }
 
-.drawer{
+.drawer {
     padding: 1em;
+}
+.list{
+    margin: 1em 0;
 }
