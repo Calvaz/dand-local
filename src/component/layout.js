@@ -23,13 +23,8 @@ export default class Layout extends React.Component {
     return (
       <div id='dand-layout'>
         <Header />
-        <div id='root-flex'><nav>
-          <ol>
-            <li><button onClick={this.onPageChange.bind(this, DASHBOARD)}>Dashboard</button></li>
-            <li><button onClick={this.onPageChange.bind(this, CHARACTERS)}>Characters</button></li>
-            <li><button onClick={this.onPageChange.bind(this, LOCATIONS)}>Locations</button></li>
-          </ol>
-        </nav>
+        
+        <div id='root-flex'>          
           {this.state.layout === CHARACTERS && <Characters />}
           {this.state.layout === LOCATIONS && <Locations />}
           {this.state.layout === DASHBOARD && <Dashboard />}

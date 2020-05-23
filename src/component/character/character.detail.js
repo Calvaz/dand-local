@@ -42,7 +42,7 @@ export default class CharacterDetail extends React.Component {
         <div>
        
           {(this.state.imageUrl != null) ?
-            <img class="detail-image" src={this.state.imageUrl} ></img>
+            <img class="detail-image" src={this.state.imageUrl} alt='character prifle' ></img>
             : <p>+</p>
           }
           <input id="image" name="image"

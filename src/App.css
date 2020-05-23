@@ -1,5 +1,73 @@
-/* 
-#a47d40
-#a42335
-#4bad6a 
-*/
+@import "~normalize.css";
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+
+#root-flex{
+    display: flex;
+}
+
+nav {
+    flex: 1;
+    flex-flow: column;        
+    border-right: #eceded solid 3px;
+    margin-right: 1em;
+    display: flex;
+}
+
+main {
+    flex: 11
+}
+
+/* body{
+    background-color: #383d3b;
+    color: #eceded;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;    
+    font-size: large;
+    padding: 1em 3em;
+}
+a {
+    color: #d69733
+}
+
+
+
+nav li {    
+    padding: 0.5em 0 0 1em;
+    list-style-type: none;
+    margin: 0;
+}
+nav li button{    
+     /* background-color: #d69733;  */
+    /* background: none;
+    border: none;
+    color: #d69733;
+    padding: 0.5em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: larger;    
+    border-radius: 11px 0px;
+}
+nav li button:hover{    
+    background-color: #d69733;
+    color: #383d3b
+}
+
+nav ol{
+    padding: 0
+}
+
+
+
+
+
+header{
+    border-bottom: #eceded solid 3px;    
+}
+
+header h1, header h2{
+    display: inline;
+    padding: 1em 1em 0 0
+}
+ */ 
