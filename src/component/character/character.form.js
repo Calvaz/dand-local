@@ -1,9 +1,9 @@
 import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
-import {Drawer} from '@blueprintjs/core'
+import { Button, Drawer, Label, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.addNewCharacter = this.addNewCharacter.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -15,7 +15,7 @@ export default class CharacterForm extends React.Component {
     }
   }
 
-  addNewCharacter (event) {
+  addNewCharacter(event) {
     event.preventDefault()
 
     const newChar = {
@@ -29,7 +29,7 @@ export default class CharacterForm extends React.Component {
     this.props.submitComplete()
   }
 
-  handleChange (event) {
+  handleChange(event) {
     const target = event.target
     const value = target.value
     const name = target.name
@@ -39,17 +39,29 @@ export default class CharacterForm extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return (
-      <Drawer isOpen={false}>
-        <form onSubmit={this.addNewCharacter}>
-          <fieldset>
-          Name: <input name='name' value={this.state.name} onChange={this.handleChange} />
-          Class: <input name='class' value={this.state.class} onChange={this.handleChange} />
-            <input type='submit' value='Add Character' />
-          </fieldset>
-        </form>
-      </Drawer>
+      <div className='drawer'>
+        <FormGroup
+          label="Name"
+          labelFor="name"
+          labelInfo="(required)">
+          <InputGroup name="name" placeholder="name" 
+          value={this.state.name} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup
+          label="Class"
+          labelFor="class"
+          labelInfo="(required)">
+          <InputGroup name="class" placeholder="class" 
+          value={this.state.class} 
+          onChange={this.handleChange} />
+        </FormGroup>
+
+        <Button text='Add Character' onClick={this.addNewCharacter} 
+        intent={Intent.PRIMARY}/>
+
+      </div>
     )
   }
 }

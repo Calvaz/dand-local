@@ -1,6 +1,6 @@
 import React from 'react'
 import './character.css'
-import {Card, Elevation} from '@blueprintjs/core'
+import {Card} from '@blueprintjs/core'
 export default class CharacterList extends React.Component {
   render() {
 

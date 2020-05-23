@@ -43,7 +43,7 @@ export default class Character extends React.Component {
     })
   }
 
-  unSelectCharacter = () =>{
+  unSelectCharacter = () => {
     this.setState({
       selectedCharacter: {},
       isCharacterSelected: false
@@ -85,9 +85,13 @@ export default class Character extends React.Component {
             disabled={this.state.isCharacterFormVisible}>New</Button>
         </article>
 
-        {this.state.isCharacterFormVisible &&
+        <Drawer isOpen={this.state.isCharacterFormVisible}
+          title="Add new Character"
+          onClose={this.handleFormVisibile}
+          canOutsideClickClose={true}>
           <CharacterForm
-            submitComplete={this.handleSubmitCharacter} />}
+            submitComplete={this.handleSubmitCharacter} />
+        </Drawer>
 
         <CharacterList
           characters={this.state.characters}
