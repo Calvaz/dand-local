@@ -11,10 +11,8 @@ export const LOCATIONS = 'LOCATIONS'
 export default class Layout extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = { layout: DASHBOARD }
+    this.state = { layout: DASHBOARD }    
   }
-
   onPageChange(page) {
     this.setState({ layout: page })
   }
@@ -22,7 +20,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div id='dand-layout'>
-        <Header />
+        <Header pageChange={this.onPageChange.bind(this)} />
         
         <div id='root-flex'>          
           {this.state.layout === CHARACTERS && <Characters />}
