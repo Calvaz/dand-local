@@ -16,7 +16,8 @@ nav {
 }
 
 main {
-    flex: 11
+    flex: 11;
+    padding: 2em;
 }
 
 /* body{

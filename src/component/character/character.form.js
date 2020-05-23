@@ -1,7 +1,7 @@
 import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
-
+import {Drawer} from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
   constructor (props) {
     super(props)
@@ -41,7 +41,7 @@ export default class CharacterForm extends React.Component {
 
   render () {
     return (
-      <article>
+      <Drawer isOpen={false}>
         <form onSubmit={this.addNewCharacter}>
           <fieldset>
           Name: <input name='name' value={this.state.name} onChange={this.handleChange} />
@@ -49,7 +49,7 @@ export default class CharacterForm extends React.Component {
             <input type='submit' value='Add Character' />
           </fieldset>
         </form>
-      </article>
+      </Drawer>
     )
   }
 }

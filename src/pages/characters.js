@@ -3,6 +3,8 @@ import CharacterList from '../component/character/character-list'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
 import CharacterDetail from '../component/character/character.detail'
+import { Button, Drawer } from '@blueprintjs/core'
+
 export default class Character extends React.Component {
   constructor(props) {
     super(props)
@@ -39,8 +41,15 @@ export default class Character extends React.Component {
       selectedCharacter: character,
       isCharacterSelected: true
     })
-
   }
+
+  unSelectCharacter = () =>{
+    this.setState({
+      selectedCharacter: {},
+      isCharacterSelected: false
+    })
+  }
+
   deleteCharacter = (character) => {
     console.debug(character)
     let deleteResult = this.store.delete(character)
@@ -72,7 +81,8 @@ export default class Character extends React.Component {
       <main>
         <article>
           <h2>Characters</h2>
-          <button onClick={this.handleFormVisibile} disabled={this.state.isCharacterFormVisible}>New</button>
+          <Button onClick={this.handleFormVisibile} icon='add'
+            disabled={this.state.isCharacterFormVisible}>New</Button>
         </article>
 
         {this.state.isCharacterFormVisible &&
@@ -84,11 +94,15 @@ export default class Character extends React.Component {
           selectCharacter={this.onSelectCharacter}
           selectedCharacter={this.state.selectedCharacter} />
 
-        {this.state.isCharacterSelected &&
+        <Drawer isOpen={this.state.isCharacterSelected}
+          onClose={this.unSelectCharacter}
+          canOutsideClickClose={true}
+          title={this.state.selectedCharacter.name}>
           <CharacterDetail
             character={this.state.selectedCharacter}
             onDelete={this.deleteCharacter}
-            addImage={this.addImage} />}
+            addImage={this.addImage} />
+        </Drawer>
       </main>
     )
   }

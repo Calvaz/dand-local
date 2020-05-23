@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Button, Alignment } from '@blueprintjs/core'
+import { Navbar, Button} from '@blueprintjs/core'
 
 import { DASHBOARD, CHARACTERS, LOCATIONS } from './layout'
 
