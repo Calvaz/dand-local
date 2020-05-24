@@ -64,8 +64,8 @@ export default class CharacterForm extends React.Component {
           label="Sex" name="sex"
           onChange={this.handleChange}
           selectedValue={this.state.sex}>
-          <Radio label="male" value="male" />
-          <Radio label="female" value="female" />
+          <Radio label="Male" value="male" />
+          <Radio label="Female" value="female" />
         </RadioGroup>
         <Button text='Add Character' onClick={this.addNewCharacter}
           intent={Intent.PRIMARY} />
