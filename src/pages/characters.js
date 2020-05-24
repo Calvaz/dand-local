@@ -3,7 +3,7 @@ import CharacterList from '../component/character/character-list'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
 import CharacterDetail from '../component/character/character.detail'
-import { Button, Drawer } from '@blueprintjs/core'
+import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
 
 export default class Character extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class Character extends React.Component {
     this.state = {
       isCharacterFormVisible: false,
       isCharacterSelected: false,
+      isDeleteDialogOpen: false,
       selectedCharacter: {},
       characters: []
     }
@@ -50,9 +51,12 @@ export default class Character extends React.Component {
     })
   }
 
-  deleteCharacter = (character) => {
-    console.debug(character)
-    let deleteResult = this.store.delete(character)
+  deleteDialogHandleOpen = () => this.setState({ isDeleteDialogOpen: true });
+  deleteDialgohandleClose = () => this.setState({ isDeleteDialogOpen: false });
+
+  deleteCharacter = () => {    
+
+    let deleteResult = this.store.delete(this.state.selectedCharacter)
       .then((res) => {
         return res
       })
@@ -65,6 +69,7 @@ export default class Character extends React.Component {
         isCharacterSelected: false
       })
     }
+    this.deleteDialgohandleClose()
   }
 
   addImage = (e, character) => {
@@ -88,7 +93,8 @@ export default class Character extends React.Component {
         <Drawer isOpen={this.state.isCharacterFormVisible}
           title="Add new Character"
           onClose={this.handleFormVisibile}
-          canOutsideClickClose={true}>
+          canOutsideClickClose={true}
+          size='350px'>
           <CharacterForm
             submitComplete={this.handleSubmitCharacter} />
         </Drawer>
@@ -102,12 +108,27 @@ export default class Character extends React.Component {
           onClose={this.unSelectCharacter}
           canOutsideClickClose={true}
           title={this.state.selectedCharacter.name}
-          size='30%'>
+          size='350px'>
           <CharacterDetail
             character={this.state.selectedCharacter}
-            onDelete={this.deleteCharacter}
+            onDelete={this.deleteDialogHandleOpen}
             addImage={this.addImage} />
         </Drawer>
+
+        <Dialog isOpen={this.state.isDeleteDialogOpen}
+          icon="delete"
+          title="Deleting character">
+          <div className={Classes.DIALOG_BODY}>
+            <p>Really do you want to delete this pretty character?</p>
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={this.deleteDialgohandleClose}>Bless him</Button>
+              <Button onClick={this.deleteCharacter}
+              intent={Intent.DANGER}>Delete that bitch!</Button>
+            </div>
+          </div>
+        </Dialog>
       </main>
     )
   }
