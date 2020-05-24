@@ -101,7 +101,8 @@ export default class Character extends React.Component {
         <Drawer isOpen={this.state.isCharacterSelected}
           onClose={this.unSelectCharacter}
           canOutsideClickClose={true}
-          title={this.state.selectedCharacter.name}>
+          title={this.state.selectedCharacter.name}
+          size='30%'>
           <CharacterDetail
             character={this.state.selectedCharacter}
             onDelete={this.deleteCharacter}

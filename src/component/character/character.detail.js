@@ -1,7 +1,7 @@
 import React from 'react'
 import './character.css'
 import Store from '../../store'
-import { Button, Intent } from '@blueprintjs/core'
+import { Button, Intent, FileInput, FormGroup } from '@blueprintjs/core'
 export default class CharacterDetail extends React.Component {
 
   constructor(props) {
@@ -38,20 +38,22 @@ export default class CharacterDetail extends React.Component {
       <article className='drawer' >
 
         <div><label>Name: </label>  <span>{this.props.character.name}</span></div>
-        <div><label>Class: </label> <span>{this.props.character.class}</span></div>
-        <div>
-       
+        <div><label>Class: </label> <span>{this.props.character.class}</span></div>        
+
           {(this.state.imageUrl != null) ?
             <img className="detail-image" src={this.state.imageUrl} alt='character profile' ></img>
             : <p></p>
           }
-          <input id="image" name="image"
-          onChange={(e) => this.props.addImage(e, this.props.character)}
-          type="file" ></input>
-
-          <Button onClick={(e) => this.props.onDelete(this.props.character)}
-          text="Delete" intent={Intent.DANGER}/>
-        </div>
+          <FormGroup>
+            <FileInput id="image" name="image"
+              onChange={(e) => this.props.addImage(e, this.props.character)}
+              type="file" ></FileInput >
+          </FormGroup>
+          <FormGroup>
+            <Button onClick={(e) => this.props.onDelete(this.props.character)}
+              text="Delete" intent={Intent.DANGER} />
+          </FormGroup>
+        
       </article>
     )
   }
