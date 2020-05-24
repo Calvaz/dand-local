@@ -2,7 +2,7 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import { Button, Drawer, Label, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent,  } from '@blueprintjs/core'
+  RadioGroup, Radio, Intent, Switch } from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)
@@ -14,6 +14,7 @@ export default class CharacterForm extends React.Component {
       name: '',
       class: '',
       sex: '',
+      isFavorite: false,
     }
   }
 
@@ -25,6 +26,7 @@ export default class CharacterForm extends React.Component {
       name: this.state.name,
       class: this.state.class,
       sex: this.state.sex,
+      isFavorite: this.state.isFavorite
     }
     console.log(newChar)
     this.store.addCharacter(newChar)
@@ -60,6 +62,7 @@ export default class CharacterForm extends React.Component {
             value={this.state.class}
             onChange={this.handleChange} />
         </FormGroup>
+        <FormGroup>
         <RadioGroup
           label="Sex" name="sex"
           onChange={this.handleChange}
@@ -67,6 +70,13 @@ export default class CharacterForm extends React.Component {
           <Radio label="Male" value="male" />
           <Radio label="Female" value="female" />
         </RadioGroup>
+        </FormGroup>
+        <FormGroup>
+        <Switch checked={this.state.isFavorite} 
+        name="isFavorite"
+        label="Favorite" 
+        onChange={this.handleChange} />
+        </FormGroup>
         <Button text='Add Character' onClick={this.addNewCharacter}
           intent={Intent.PRIMARY} />
 

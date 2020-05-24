@@ -1,7 +1,7 @@
 import React from 'react'
 import './character.css'
 import Store from '../../store'
-import { Button, Intent, FileInput, FormGroup } from '@blueprintjs/core'
+import { Button, Intent, FileInput, FormGroup, Label, Icon, Switch } from '@blueprintjs/core'
 export default class CharacterDetail extends React.Component {
 
   constructor(props) {
@@ -37,24 +37,31 @@ export default class CharacterDetail extends React.Component {
     return (
       <article className='drawer' >
 
-        <div><label>Name: </label>  <span>{this.props.character.name}</span></div>
-        <div><label>Class: </label> <span>{this.props.character.class}</span></div>        
-        <div><label>Sex: </label> <span>{this.props.character.sex}</span></div>        
+        <p><label>Name: </label>  <span>{this.props.character.name}</span></p>
+        <p><label>Class: </label> <span>{this.props.character.class}</span></p>
+        <p><label>Sex: </label> <span>{this.props.character.sex}</span></p>
 
-          {(this.state.imageUrl != null) ?
-            <img className="detail-image" src={this.state.imageUrl} alt='character profile' ></img>
-            : <p></p>
-          }
-          <FormGroup>
-            <FileInput id="image" name="image"
-              onChange={(e) => this.props.addImage(e, this.props.character)}
-              type="file" ></FileInput >
-          </FormGroup>
-          <FormGroup>
-            <Button onClick={(e) => this.props.onDelete(this.props.character)}
-              text="Delete" intent={Intent.DANGER} />
-          </FormGroup>
-        
+        <Switch checked={this.props.character.isFavorite}
+          name="favorite"
+          disabled="true"
+          label="Favorite"
+        />
+
+
+        {(this.state.imageUrl != null) ?
+          <img className="detail-image" src={this.state.imageUrl} alt='character profile' ></img>
+          : <p></p>
+        }
+        <FormGroup>
+          <FileInput id="image" name="image"
+            onChange={(e) => this.props.addImage(e, this.props.character)}
+            type="file" ></FileInput >
+        </FormGroup>
+        <FormGroup>
+          <Button onClick={(e) => this.props.onDelete(this.props.character)}
+            text="Delete" intent={Intent.DANGER} />
+        </FormGroup>
+
       </article>
     )
   }
