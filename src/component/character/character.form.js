@@ -1,7 +1,8 @@
 import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
-import { Button, Drawer, Label, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
+import { Button, Drawer, Label, FormGroup, InputGroup,
+  RadioGroup, Radio, Intent,  } from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)
@@ -11,7 +12,8 @@ export default class CharacterForm extends React.Component {
     this.store = new Store()
     this.state = {
       name: '',
-      class: ''
+      class: '',
+      sex: '',
     }
   }
 
@@ -21,7 +23,8 @@ export default class CharacterForm extends React.Component {
     const newChar = {
       _id: uuid.v4(),
       name: this.state.name,
-      class: this.state.class
+      class: this.state.class,
+      sex: this.state.sex,
     }
     console.log(newChar)
     this.store.addCharacter(newChar)
@@ -46,20 +49,26 @@ export default class CharacterForm extends React.Component {
           label="Name"
           labelFor="name"
           labelInfo="(required)">
-          <InputGroup name="name" placeholder="name" 
-          value={this.state.name} onChange={this.handleChange} />
+          <InputGroup name="name" placeholder="name"
+            value={this.state.name} onChange={this.handleChange} />
         </FormGroup>
         <FormGroup
           label="Class"
           labelFor="class"
           labelInfo="(required)">
-          <InputGroup name="class" placeholder="class" 
-          value={this.state.class} 
-          onChange={this.handleChange} />
+          <InputGroup name="class" placeholder="class"
+            value={this.state.class}
+            onChange={this.handleChange} />
         </FormGroup>
-
-        <Button text='Add Character' onClick={this.addNewCharacter} 
-        intent={Intent.PRIMARY}/>
+        <RadioGroup
+          label="Sex" name="sex"
+          onChange={this.handleChange}
+          selectedValue={this.state.sex}>
+          <Radio label="male" value="male" />
+          <Radio label="female" value="female" />
+        </RadioGroup>
+        <Button text='Add Character' onClick={this.addNewCharacter}
+          intent={Intent.PRIMARY} />
 
       </div>
     )

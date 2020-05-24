@@ -39,6 +39,7 @@ export default class CharacterDetail extends React.Component {
 
         <div><label>Name: </label>  <span>{this.props.character.name}</span></div>
         <div><label>Class: </label> <span>{this.props.character.class}</span></div>        
+        <div><label>Sex: </label> <span>{this.props.character.sex}</span></div>        
 
           {(this.state.imageUrl != null) ?
             <img className="detail-image" src={this.state.imageUrl} alt='character profile' ></img>
