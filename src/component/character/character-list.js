@@ -7,14 +7,14 @@ export default class CharacterList extends React.Component {
     const charlist = this.props.characters.map(c => (
       <Card interactive={true} key={c._id}
         onClick={(e) => this.props.selectCharacter(c, e)}
-        className='list'>        
+        className='flex-card'>        
         <small>{c.class}</small>
         <p>{c.name}</p>
       </Card>
     ))
 
     return (
-      <article className='flex-container'>
+      <article className="flex-card-container">
         {charlist}
       </article>
     )

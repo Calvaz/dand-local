@@ -2,3 +2,14 @@
     max-height: 350px;
     object-fit: cover;
 }
+
+.flex-card-container{
+    display: flex ;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.flex-card{
+    margin: 2em;
+    padding: 2em;
+    width: 400px;
+}
