@@ -36,8 +36,11 @@ export default class CharacterForm extends React.Component {
 
   handleChange(event) {
     const target = event.target
-    const value = target.value
+    let value = target.value
     const name = target.name
+
+    if(target.type === 'checkbox')
+      value = target.checked
 
     this.setState({
       [name]: value
