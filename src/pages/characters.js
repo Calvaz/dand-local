@@ -25,10 +25,22 @@ export default class Character extends React.Component {
     this.setState({ isCharacterFormVisible: !this.state.isCharacterFormVisible })
   }
 
-  fetchCharacters = () => {
+  fetchCharacters = () => {    
     this.store.getAllCharacter().then(
-      (characters) =>
+      (characters) => {
         this.setState({ characters: characters })
+        
+        // update imageUrl for all characters
+        characters.forEach((c,idx)=> 
+          this.store.getImageURL(c._id).then((url) => {
+            c.imageUrl = url
+            let newcharacthers = [...this.state.characters]
+            newcharacthers[idx] = c
+            this.setState({characters: newcharacthers})
+          })
+        )
+
+      }
     )
   }
 

@@ -15,15 +15,8 @@ export default class CharacterDetail extends React.Component {
   }
 
   getImageURL = () => {
-    return this.store.store.getAttachment(this.props.character._id, this.props.character._id)
-      .then((image) => {
-        let url = URL.createObjectURL(image)
-        this.setState({ imageUrl: url })
-      })
-      .catch((e) => {
-        this.setState({ imageUrl: null })
-        console.error(e)
-      })
+    this.store.getImageURL(this.props.character._id)
+      .then(url =>{this.setState({imageUrl: url})})
   }
 
   componentDidUpdate(prevProps) {

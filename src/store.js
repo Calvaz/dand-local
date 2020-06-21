@@ -27,6 +27,17 @@ export default class Store {
         .then((res) => console.log(res))
     }
 
+    this.getImageURL = (id) => {
+      return this.store.getAttachment(id, id)
+        .then((image) => {
+          let url = URL.createObjectURL(image)
+          return url
+        })
+        .catch((e) => {          
+          console.error(e)
+        })
+    }
+
     this.getAllCharacter = function () {
       return this.getAllByType(CHARACTER_TYPE)
     }

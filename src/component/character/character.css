@@ -13,3 +13,7 @@
     padding: 2em;
     width: 400px;
 }
+
+.character-list-image{
+    max-width:200px;
+}
