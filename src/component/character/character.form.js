@@ -1,36 +1,40 @@
 import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
-import { Button, Drawer, Label, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent, Switch } from '@blueprintjs/core'
+import {
+  Button, Drawer, Label, FormGroup, InputGroup,
+  RadioGroup, Radio, Intent, Switch, FileInput
+} from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)
-    this.addNewCharacter = this.addNewCharacter.bind(this)
+    this.saveCharacter = this.saveCharacter.bind(this)
     this.handleChange = this.handleChange.bind(this)
 
     this.store = new Store()
+
     this.state = {
+      _id: uuid.v4(),
       name: '',
       class: '',
       sex: '',
       isFavorite: false,
+      isNew: true,      
     }
+    if(this.props.character)
+      this.state = {...this.props.character, isNew: false}
+
   }
 
-  addNewCharacter(event) {
-    event.preventDefault()
+  componentDidMount(){
+    
+  }
 
-    const newChar = {
-      _id: uuid.v4(),
-      name: this.state.name,
-      class: this.state.class,
-      sex: this.state.sex,
-      isFavorite: this.state.isFavorite
-    }
-    console.log(newChar)
+  saveCharacter(event) {
+    event.preventDefault()
+    const newChar = { ...this.state }
+    console.info(newChar)
     this.store.addCharacter(newChar)
-    console.log(this.store.getAllCharacter())
     this.props.submitComplete()
   }
 
@@ -39,7 +43,7 @@ export default class CharacterForm extends React.Component {
     let value = target.value
     const name = target.name
 
-    if(target.type === 'checkbox')
+    if (target.type === 'checkbox')
       value = target.checked
 
     this.setState({
@@ -66,21 +70,42 @@ export default class CharacterForm extends React.Component {
             onChange={this.handleChange} />
         </FormGroup>
         <FormGroup>
-        <RadioGroup
-          label="Sex" name="sex"
-          onChange={this.handleChange}
-          selectedValue={this.state.sex}>
-          <Radio label="Male" value="male" />
-          <Radio label="Female" value="female" />
-        </RadioGroup>
+          <RadioGroup
+            label="Sex" name="sex"
+            onChange={this.handleChange}
+            selectedValue={this.state.sex}>
+            <Radio label="Male" value="male" />
+            <Radio label="Female" value="female" />
+          </RadioGroup>
         </FormGroup>
         <FormGroup>
-        <Switch checked={this.state.isFavorite} 
-        name="isFavorite"
-        label="Favorite" 
-        onChange={this.handleChange} />
+          <Switch checked={this.state.isFavorite}
+            name="isFavorite"
+            label="Favorite"
+            onChange={this.handleChange} />
         </FormGroup>
-        <Button text='Add Character' onClick={this.addNewCharacter}
+
+
+        {(this.state.imageUrl) ?
+          <img className="detail-image" 
+          src={this.state.imageUrl} 
+          alt='character profile' >            
+          </img>
+          :
+          <FormGroup>
+            <FileInput id="image" name="image"
+              onChange={(e) => this.props.addImage(e, this.state)}
+              type="file" ></FileInput >
+          </FormGroup>
+        }
+
+        <FormGroup>
+          <Button onClick={(e) => this.props.onDelete(this.props.character)}
+            text="Delete"
+            intent={Intent.DANGER}
+            disabled={this.state.isNew} />
+        </FormGroup>
+        <Button text='Save' onClick={this.saveCharacter}
           intent={Intent.PRIMARY} />
 
       </div>

@@ -2,14 +2,13 @@ import React from 'react'
 import CharacterList from '../component/character/character-list'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
-import CharacterDetail from '../component/character/character.detail'
 import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
 
 export default class Character extends React.Component {
   constructor(props) {
     super(props)
     this.store = new Store()
-    this.handleFormVisibile = this.handleFormVisibile.bind(this)
+    
     this.handleSubmitCharacter = this.handleSubmitCharacter.bind(this)
 
     this.state = {
@@ -19,10 +18,6 @@ export default class Character extends React.Component {
       selectedCharacter: {},
       characters: []
     }
-  }
-
-  handleFormVisibile() {
-    this.setState({ isCharacterFormVisible: !this.state.isCharacterFormVisible })
   }
 
   fetchCharacters = () => {    
@@ -39,14 +34,13 @@ export default class Character extends React.Component {
             this.setState({characters: newcharacthers})
           })
         )
-
       }
     )
   }
 
   handleSubmitCharacter() {
-    this.fetchCharacters()
-    this.handleFormVisibile()
+    this.fetchCharacters()    
+    this.unSelectCharacter()
   }
 
   onSelectCharacter = (character) => {
@@ -98,34 +92,27 @@ export default class Character extends React.Component {
       <main>
         <article>
           <h2>Characters</h2>
-          <Button onClick={this.handleFormVisibile} icon='add'
-            disabled={this.state.isCharacterFormVisible}>New</Button>
+          <Button onClick={()=>this.onSelectCharacter(null)} 
+            icon='add'
+            disabled={this.state.isCharacterSelected}>New</Button>
         </article>
 
-        <Drawer isOpen={this.state.isCharacterFormVisible}
+        <Drawer isOpen={this.state.isCharacterSelected}
           title="Add new Character"
-          onClose={this.handleFormVisibile}
+          onClose={this.unSelectCharacter}
           canOutsideClickClose={true}
           size='350px'>
           <CharacterForm
-            submitComplete={this.handleSubmitCharacter} />
+            submitComplete={this.handleSubmitCharacter} 
+            character={this.state.selectedCharacter}
+            onDelete={this.deleteDialogHandleOpen}
+            addImage={this.addImage} />
         </Drawer>
 
         <CharacterList
           characters={this.state.characters}
           selectCharacter={this.onSelectCharacter}
           selectedCharacter={this.state.selectedCharacter} />
-
-        <Drawer isOpen={this.state.isCharacterSelected}
-          onClose={this.unSelectCharacter}
-          canOutsideClickClose={true}
-          title={this.state.selectedCharacter.name}
-          size='350px'>
-          <CharacterDetail
-            character={this.state.selectedCharacter}
-            onDelete={this.deleteDialogHandleOpen}
-            addImage={this.addImage} />
-        </Drawer>
 
         <Dialog isOpen={this.state.isDeleteDialogOpen}
           icon="delete"
