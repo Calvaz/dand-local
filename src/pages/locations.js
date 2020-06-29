@@ -1,27 +1,39 @@
 import React from 'react'
 import LocationForm from '../component/location/location.form'
-import LocationList from '../component/location/location-list'
 import Store from '../store'
+import DandCards from '../component/common/dandCards'
+import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
+
 
 export default class Locations extends React.Component {
   constructor(props) {
     super(props)
 
     this.store = new Store()
-    this.handleFormVisibile = this.handleFormVisibile.bind(this)
 
     this.state = {
-      isLocationFormVisible: false,
-      locations: []
+      locations: [],
+      isDeleteDialogOpen: false,
+      isLocationSelected: false,
+      selectedLocation: null
     }
   }
 
-  handleFormVisibile() {
-    this.setState({ isLocationFormVisible: !this.isLocationFormVisible })
+  onSelectLocation = (location) => {
+    this.setState({
+      selectedLocation: location,
+      isLocationSelected: true
+    })
+  }
+  unSelectLocation = () => {
+    this.setState({
+      selectedLocation: null,
+      isLocationSelected: false
+    })
   }
 
   fetchLocations = () => {
-    this.store.getAllByTypeName('LOCATION_TYPE').then(
+    this.store.getAllLocation().then(
       (locations) =>
         this.setState({ locations: locations })
     )
@@ -31,21 +43,75 @@ export default class Locations extends React.Component {
     this.fetchLocations()
   }
 
+  handleSubmitLocation = () => {
+    this.fetchLocations()
+    this.unSelectLocation()
+  }
+
+  deleteLocation = () => {
+    let deleteResult = this.store.delete(this.state.selectedLocation)
+      .then((res) => {
+        return res
+      })
+
+    if (deleteResult)
+      this.handleSubmitLocation()
+
+    this.deleteDialgohandleClose()
+  };
+
+
+  deleteDialogHandleOpen = () => this.setState({ isDeleteDialogOpen: true });
+  deleteDialgohandleClose = () => this.setState({ isDeleteDialogOpen: false });
+
+
   render() {
     return (
       <main>
         <article>
           <h2>Locations</h2>
-          <button onClick={this.handleFormVisibile} disabled={this.state.isLocationFormVisible}>New</button>
-        </article>
-        {this.state.isLocationFormVisible &&
-          <LocationForm
-            submitComplete={this.fetchLocations()} />
-        }
+          <Button onClick={()=>this.onSelectLocation(null)} 
+            icon='add'
+            disabled={this.state.isLocationSelected}>New</Button>
 
-        <LocationList
-          locations={this.state.locations}
-        />
+          <DandCards
+            elements={this.state.locations}
+            onSelect={this.onSelectLocation}
+            title="name"
+            subtitle="area"
+            description="description"
+            imageUrl="imageUrl"
+          />
+
+        </article>
+
+          <Drawer isOpen={this.state.isLocationSelected}
+            title="Add Location"
+            onClose={this.unSelectLocation}
+            canOutsideClickClose={true}
+            size='350px'>
+            <LocationForm
+              submitComplete={this.handleSubmitLocation}
+              location={this.state.selectedLocation}
+              onDelete={this.deleteDialogHandleOpen}
+              addImage={this.addImage} />
+          </Drawer>
+
+          
+          <Dialog isOpen={this.state.isDeleteDialogOpen}
+            icon="delete"
+            title="Deleting location">
+            <div className={Classes.DIALOG_BODY}>
+              <p>Do you want to delete this pretty location for real?</p>
+            </div>
+            <div className={Classes.DIALOG_FOOTER}>
+              <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                <Button onClick={this.deleteDialgohandleClose}>Bless him</Button>
+                <Button onClick={this.deleteLocation}
+                  intent={Intent.DANGER}>Delete that shit!</Button>
+              </div>
+            </div>
+          </Dialog>
       </main>
     )
   }

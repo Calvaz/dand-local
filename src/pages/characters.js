@@ -125,7 +125,7 @@ export default class Characters extends React.Component {
           icon="delete"
           title="Deleting character">
           <div className={Classes.DIALOG_BODY}>
-            <p>Really do you want to delete this pretty character?</p>
+            <p>Do you want to delete this pretty character for real?</p>
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>

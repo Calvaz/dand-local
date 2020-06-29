@@ -26,10 +26,6 @@ export default class CharacterForm extends React.Component {
 
   }
 
-  componentDidMount(){
-    
-  }
-
   saveCharacter(event) {
     event.preventDefault()
     const newChar = { ...this.state }

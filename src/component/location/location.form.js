@@ -1,39 +1,47 @@
 import React from 'react'
 import uuid from 'uuid'
 import Store from '../../store'
+import {
+  Button, Drawer, Label, FormGroup, InputGroup,
+  RadioGroup, Radio, Intent, Switch, FileInput
+} from '@blueprintjs/core'
 
 export default class LocationForm extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
-    this.addNewLocation = this.addNewLocation.bind(this)
+    this.saveLocation = this.saveLocation.bind(this)
 
     this.store = new Store()
     this.state = {
-      title: '',
+      _id: uuid.v4(),
+      name: '',
+      area: '',
       description: '',
-      favorite: false
+      isFavorite: false,
+      isNew: true,
+    }
+    if(this.props.location != null){
+      this.state = {...this.props.location, isNew: false}
     }
   }
 
-  addNewLocation(event) {
+  saveLocation(event) {
     event.preventDefault()
 
-    const newLocation = {
-      _id: uuid.v4(),
-      title: this.state.title,
-      description: this.state.description,
-      favorite: this.state.favorite
-    }
-
-    this.store.add(newLocation, 'LOCATION_TYPE')
-    console.log(newLocation)
+    const newLocation = {...this.state}
+    this.store.addLocation(newLocation)
+    console.info(newLocation)
+    this.props.submitComplete()
   }
 
   handleChange(event) {
     const target = event.target
-    const value = target.value
+    let value = target.value
     const name = target.name
+
+    if (target.type === 'checkbox')
+      value = target.checked
 
     this.setState({
       [name]: value
@@ -41,19 +49,55 @@ export default class LocationForm extends React.Component {
   }
 
   render() {
-    return (
-      <article>
-        <form onSubmit={this.addNewLocation}>
-          <fieldset>
-            <label>Location: </label>
-            <input name='title' value={this.state.title} onChange={this.handleChange} />
-            <br />
-            <label>Description: </label>
-            <textarea name='description' value={this.state.description} onChange={this.handleChange} className='locDescription' />
-          </fieldset>
-          <input type='submit' value='Add location' />
-        </form>
-      </article>
+    return (      
+        <div className='drawer'>
+        <FormGroup
+          label="Name"
+          labelFor="name"
+          labelInfo="(required)">
+          <InputGroup name="name" placeholder="name"
+            value={this.state.name} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup
+          label="Area"
+          labelFor="area"
+          labelInfo="(required)">
+          <InputGroup name="area" placeholder="area"
+            value={this.state.area}
+            onChange={this.handleChange} />
+        </FormGroup>        
+        <FormGroup>
+          <Switch checked={this.state.isFavorite}
+            name="isFavorite"
+            label="Favorite"
+            onChange={this.handleChange} />
+        </FormGroup>
+
+
+        {(this.state.imageUrl) ?
+          <img className="detail-image" 
+          src={this.state.imageUrl} 
+          alt='location image' >            
+          </img>
+          :
+          <FormGroup>
+            <FileInput id="image" name="image"
+              onChange={(e) => this.props.addImage(e, this.state)}
+              type="file" ></FileInput >
+          </FormGroup>
+        }
+
+        <FormGroup>
+          <Button onClick={(e) => this.props.onDelete(this.props.location)}
+            text="Delete"
+            intent={Intent.DANGER}
+            disabled={this.state.isNew} />
+        </FormGroup>
+        <Button text='Save' onClick={this.saveLocation}
+          intent={Intent.PRIMARY} />
+
+      </div>
+      
     )
   }
 }
