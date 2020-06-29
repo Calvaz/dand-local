@@ -1,10 +1,13 @@
 import React from 'react'
-import CharacterList from '../component/character/character-list'
+import DandCards from '../component/common/dandCards'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
 import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
+import Character from '../model/character'
+import '../component/character/character.css'
 
-export default class Character extends React.Component {
+
+export default class Characters extends React.Component {
   constructor(props) {
     super(props)
     this.store = new Store()
@@ -109,10 +112,14 @@ export default class Character extends React.Component {
             addImage={this.addImage} />
         </Drawer>
 
-        <CharacterList
-          characters={this.state.characters}
-          selectCharacter={this.onSelectCharacter}
-          selectedCharacter={this.state.selectedCharacter} />
+        <DandCards
+          elements={this.state.characters}
+          onSelect={this.onSelectCharacter}
+          title = "name"
+          subtitle = "class"
+          description = "description"
+          imageUrl = "imageUrl"
+          />
 
         <Dialog isOpen={this.state.isDeleteDialogOpen}
           icon="delete"
